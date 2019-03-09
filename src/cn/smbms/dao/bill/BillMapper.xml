@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.smbms.dao.bill.BillMapper">
+	
+	<!-- 查询订单信息 -->
+	<select id="getBillByNameAndPage" resultType="Bill">
+		SELECT * FROM smbms_bill 
+		WHERE 1 = 1
+		<if test="billName!=null and billName!=''">
+			AND productName LIKE CONCAT('%',#{billName},'%')
+		</if>
+		<if test="providerId != null and providerId != ''">
+			AND providerId = #{providerId}
+		</if>
+		<if test="isPayment != null and isPayment != ''">
+			AND isPayment = #{isPayment}
+		</if>
+		<!-- LIMIT #{from},#{end} -->
+	</select>
+</mapper>
